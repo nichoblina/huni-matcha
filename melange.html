@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Huni Matcha — Your Daily Matcha Fix</title>
+  <meta name="description" content="Cebu-based matcha and hojicha. Creamy lattes, signature foams, your daily matcha fix." />
+  <link rel="icon" href="images/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Syne:wght@500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --white: #f7f6f2;
+      --beige: #ebe6dc;
+      --ink: #111;
+      --muted: #6b6b6b;
+      --green: #1f3d24;
+      --green-mute: #4a6352;
+      --matcha: #3d6b42;
+      --blush: #e8c4c8;
+      --blush-deep: #d9a8ae;
+      --serif: "Libre Bodoni", "Times New Roman", serif;
+      --display: "Syne", system-ui, sans-serif;
+      --sans: "Outfit", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+    body {
+      font-family: var(--sans);
+      background: var(--beige);
+      color: var(--ink);
+      line-height: 1.5;
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .ph {
+      width: 100%; height: 100%;
+      display: grid; place-items: center;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--beige);
+    }
+
+    .hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 92vh;
+      border-radius: 0 0 28px 28px;
+      overflow: hidden;
+      background: #1a331c;
+      color: #fff;
+    }
+    .hero-media { position: absolute; inset: 0; }
+    .hero-media img, .hero-media .ph {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: blur(8px);
+      transform: scale(1.08);
+    }
+    .hero-media .ph { position: absolute; inset: 0; }
+    .hero-shade {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(10,18,12,0.45) 0%, rgba(10,18,12,0.28) 40%, rgba(10,18,12,0.55) 100%);
+      pointer-events: none;
+    }
+    .hero-nav {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: flex-start;
+      padding: 1.15rem 1.5rem;
+    }
+    .nav-cluster { display: flex; gap: 0.85rem; align-items: center; }
+    .icon-btn {
+      width: 44px; height: 44px;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      display: grid; place-items: center;
+      cursor: pointer;
+    }
+    .burger {
+      width: 44px;
+      height: 44px;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+    .burger-lines {
+      width: 18px;
+      height: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .burger-lines span {
+      display: block;
+      height: 1.6px;
+      background: currentColor;
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform 0.28s ease, opacity 0.2s ease;
+    }
+    .burger.is-open .burger-lines span:nth-child(1) {
+      transform: translateY(5.2px) rotate(45deg);
+    }
+    .burger.is-open .burger-lines span:nth-child(2) { opacity: 0; }
+    .burger.is-open .burger-lines span:nth-child(3) {
+      transform: translateY(-5.2px) rotate(-45deg);
+    }
+    @media (min-width: 861px) {
+      .hero .burger { display: none; }
+    }
+    .hero-brand {
+      position: relative;
+      z-index: 3;
+      flex: 1;
+      min-height: 62vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1rem 7rem;
+      gap: 0.15rem;
+    }
+    .hero-brand img {
+      height: clamp(150px, 32vw, 260px);
+      width: auto;
+      margin: 0 auto;
+      filter: brightness(0) invert(1);
+    }
+    .hero-tagline {
+      margin: -0.7rem 0 0;
+      font-size: clamp(0.78rem, 2.2vw, 1rem);
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.92);
+    }
+    .hero-contacts {
+      display: flex;
+      justify-content: center;
+      gap: 0.65rem;
+      margin-top: 0.85rem;
+    }
+    .hero-contacts a {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--green);
+      border: 1.5px solid var(--green);
+      color: var(--blush);
+      display: grid;
+      place-items: center;
+      transition: transform 0.22s ease, background 0.22s ease;
+    }
+    .hero-contacts a:hover {
+      background: var(--matcha);
+      transform: translateY(-2px);
+    }
+    .contact-drop {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .contact-drop-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      font-family: inherit;
+      flex-shrink: 0;
+      transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+    }
+    .contact-drop-btn:hover { transform: translateY(-2px); }
+    .contact-drop-btn:active { transform: scale(0.96); }
+    .contact-drop-menu {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.4rem;
+      max-width: 0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      overflow: hidden;
+      transform: translateX(-10px);
+      transition: opacity 0.32s ease, transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), max-width 0.36s ease, visibility 0.32s;
+    }
+    .contact-drop.is-open .contact-drop-menu {
+      max-width: 14rem;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: none;
+    }
+    .contact-drop-menu a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      background: var(--blush);
+      border: 0;
+      color: var(--green);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.22s ease, transform 0.28s ease, background 0.2s ease;
+    }
+    .contact-drop.is-open .contact-drop-menu a { opacity: 1; transform: none; }
+    .contact-drop.is-open .contact-drop-menu a:nth-child(1) { transition-delay: 0.04s; }
+    .contact-drop.is-open .contact-drop-menu a:nth-child(2) { transition-delay: 0.08s; }
+    .contact-drop.is-open .contact-drop-menu a:nth-child(3) { transition-delay: 0.12s; }
+    .contact-drop.is-open .contact-drop-menu a:nth-child(4) { transition-delay: 0.16s; }
+    .contact-drop-menu a:hover { background: var(--blush-deep); }
+    .order-copy .contact-drop-btn {
+      border: 0;
+      border-radius: 999px;
+      background: var(--blush);
+      color: var(--green);
+      padding: 0.7rem 1.15rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .order-copy .contact-drop-btn:hover { background: var(--blush-deep); }
+    .drop-arrow { transition: transform 0.28s ease; }
+    .contact-drop.is-open .drop-arrow { transform: rotate(180deg); }
+    .stats {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      gap: 3.5rem;
+      padding: 1.25rem 1.5rem 1.5rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .stats span { display: block; opacity: 0.7; font-size: 0.62rem; margin-top: 0.2rem; letter-spacing: 0.08em; }
+    .hero-popup {
+      max-width: 16rem;
+      transition: opacity 0.35s ease;
+    }
+    .hero-popup strong {
+      font-weight: 600;
+      display: block;
+    }
+    .hero-popup.is-fading { opacity: 0; }
+
+    .sheet { max-width: 1180px; margin: 0 auto; padding: 4.5rem 1.35rem 2rem; }
+    .kicker {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blush-deep);
+      margin-bottom: 0.4rem;
+    }
+    h2.display {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      letter-spacing: -0.05em;
+      line-height: 0.9;
+      text-transform: lowercase;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+    }
+    .heading-block { margin-bottom: 1.5rem; }
+    .heading-block .display { margin-bottom: 0; }
+    .section-lede {
+      color: var(--muted);
+      max-width: 32rem;
+      margin: 0.7rem 0 0;
+      font-size: 0.95rem;
+    }
+    .menu-head .heading-block { margin-bottom: 0; }
+
+    .ritual {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .ritual > div > p:not(.kicker) { color: var(--muted); max-width: 28rem; margin-bottom: 1.25rem; }
+    .btn-green {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--blush);
+      color: var(--green);
+      border: 0;
+      border-radius: 999px;
+      padding: 0.8rem 1.4rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+    }
+    .btn-green:hover { background: var(--blush-deep); transform: translateY(-2px); }
+    .btn-green:active { transform: scale(0.97); }
+
+    .featured { overflow-x: hidden; }
+
+    .carousel-track {
+      display: grid;
+      grid-template-columns: 16% 1fr 16%;
+      align-items: center;
+      gap: 0.4rem;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .slide {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #e8efe0;
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .slide.current { z-index: 2; }
+    .slide.side { transform: scale(0.92); }
+    .slide.side img { filter: blur(5px); }
+    .slide.side .drink-pill { display: none; }
+    .carousel-track.going-next .slide.current { transform: translateX(-18%); }
+    .carousel-track.going-next .slide.side { transform: translateX(-18%) scale(0.92); }
+    .carousel-track.going-prev .slide.current { transform: translateX(18%); }
+    .carousel-track.going-prev .slide.side { transform: translateX(18%) scale(0.92); }
+    .carousel-track.no-motion .slide { transition: none; }
+    .drink-pill {
+      position: absolute;
+      left: 50%;
+      bottom: 1rem;
+      transform: translateX(-50%);
+      background: rgba(247, 244, 234, 0.94);
+      border-radius: 999px;
+      padding: 0.45rem 0.95rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green);
+      border: 1px solid var(--blush);
+      white-space: nowrap;
+    }
+
+    @media (min-width: 861px) {
+      .carousel-track {
+        max-width: 560px;
+        gap: 0.55rem;
+        grid-template-columns: 18% 1fr 18%;
+      }
+      .slide { border-radius: 26px; transition-duration: 0.2s; }
+      .carousel-track.going-next .slide.current { transform: translateX(-9%); }
+      .carousel-track.going-next .slide.side { transform: translateX(-9%) scale(0.92); }
+      .carousel-track.going-prev .slide.current { transform: translateX(9%); }
+      .carousel-track.going-prev .slide.side { transform: translateX(9%) scale(0.92); }
+    }
+
+    .brand-rule {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.65rem, 2.4vw, 1.1rem);
+      width: clamp(12.5rem, 54vw, 36rem);
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: clamp(1.35rem, 4.2vw, 2.25rem) 0;
+    }
+    .brand-rule-line {
+      flex: 1;
+      height: 1px;
+      background: var(--green);
+      opacity: 0.14;
+    }
+    .brand-mark {
+      position: relative;
+      width: clamp(2.35rem, 7.4vw, 3.4rem);
+      height: clamp(2.35rem, 7.4vw, 3.4rem);
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--green);
+      overflow: hidden;
+    }
+    .brand-mark img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 134%;
+      max-width: none;
+      height: auto;
+      transform: translate(-50.4%, -49%);
+      mix-blend-mode: screen;
+      filter: brightness(1.45) contrast(1.15);
+    }
+    #menu { padding-top: 0.35rem; padding-bottom: 1.75rem; }
+
+    .menu-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.35rem 1.75rem;
+      flex-wrap: wrap;
+      margin: 0 0 1.5rem;
+    }
+    .series-toggle {
+      display: flex;
+      gap: 0.3rem;
+      padding: 0.42rem 0.38rem;
+      background: var(--blush);
+      border-radius: 999px;
+    }
+    .series-toggle button {
+      border: 0;
+      background: transparent;
+      border-radius: 999px;
+      padding: 0.72rem 1.15rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.22s ease, color 0.22s ease;
+    }
+    .series-toggle button:hover { transform: translateY(-1px); }
+    .series-toggle button.is-on { background: var(--green); color: #f7f6f2; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem 1.75rem;
+    }
+    .card {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(232, 196, 200, 0.4);
+      border-radius: 22px;
+      padding: 0.75rem 1rem 0.75rem 0.75rem;
+      border: 1px solid var(--blush-deep);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      box-shadow: 0 12px 40px rgba(31, 61, 36, 0.06);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(31, 61, 36, 0.1);
+    }
+    .card[hidden] { display: none; }
+    #menu-grid {
+      transition: opacity 0.32s ease, transform 0.32s ease;
+    }
+    #menu-grid.is-fading {
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+    }
+    .card-img {
+      aspect-ratio: 1;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--beige);
+    }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .card h3 {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+    .card .desc { color: var(--muted); font-size: 0.84rem; margin: 0.25rem 0; }
+    .card .price { font-weight: 600; color: var(--green); }
+
+    .media-block { margin-top: 0; padding-bottom: 1.25rem; overflow: hidden; }
+    .quotes-block { overflow: hidden; padding-bottom: 0.5rem; }
+    .quotes-head { margin-top: 0; padding-top: 0; }
+    .media-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr 0.85fr;
+      grid-template-rows: 210px 200px;
+      gap: 0.7rem;
+      margin-bottom: 2.4rem;
+    }
+    .media-grid figure {
+      margin: 0;
+      border-radius: 22px;
+      overflow: hidden;
+      background: var(--beige);
+    }
+    .media-grid figure:first-child { grid-row: span 2; }
+    .media-grid img { width: 100%; height: 100%; object-fit: cover; }
+    .quotes {
+      overflow: hidden;
+      max-width: 100%;
+      mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    }
+    .quotes-track {
+      display: flex;
+      gap: 1rem;
+      width: max-content;
+      animation: quotes-marquee 42s linear infinite;
+    }
+    .quotes-track:hover { animation-play-state: paused; }
+    .quote {
+      flex: 0 0 340px;
+      background: rgba(232, 196, 200, 0.4);
+      border-radius: 22px;
+      padding: 1.25rem 1.2rem 1.1rem;
+      border: 1px solid var(--blush-deep);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    }
+    .quote p {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.12rem;
+      line-height: 1.35;
+      margin-bottom: 0.85rem;
+    }
+    .quote cite {
+      display: block;
+      font-style: normal;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blush-deep);
+    }
+    @keyframes quotes-marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .spot {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+    .popup-card {
+      background: rgba(31, 61, 36, 0.72);
+      color: #f4f1ea;
+      border-radius: 28px;
+      padding: 1.7rem 1.7rem 1.55rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(20px) saturate(1.45);
+      -webkit-backdrop-filter: blur(20px) saturate(1.45);
+      box-shadow: 0 12px 40px rgba(31, 61, 36, 0.1);
+    }
+    .popup-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blush);
+      opacity: 0.95;
+      margin-bottom: 0.45rem;
+    }
+    .popup-card h3 {
+      font-family: var(--display);
+      font-size: clamp(1.15rem, 3.4vw, 1.55rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      white-space: nowrap;
+      max-width: none;
+      margin-bottom: 0.45rem;
+    }
+    .popup-street,
+    .popup-when {
+      font-size: 0.86rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      opacity: 0.62;
+      line-height: 1.4;
+      margin-bottom: 0.15rem;
+    }
+    .popup-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1.15rem;
+    }
+    .popup-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.8rem 1.4rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      border: 0;
+      color: var(--green);
+      background: #fff;
+      cursor: pointer;
+      transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease;
+    }
+    .popup-ghost:hover { background: #fff; color: var(--matcha); transform: translateY(-2px); }
+    .popup-ghost:active { transform: scale(0.97); }
+    .popup-ghost svg,
+    .popup-card .btn-green svg {
+      flex-shrink: 0;
+    }
+    .popup-card .btn-green {
+      margin-top: 0;
+      background: var(--blush);
+      color: var(--green);
+      width: auto;
+      gap: 0.45rem;
+    }
+    .popup-card .btn-green:hover { background: var(--blush-deep); }
+    .order-panel {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+    .order-copy {
+      background: rgba(232, 196, 200, 0.4);
+      border-radius: 24px;
+      padding: 1.4rem 1.4rem 1.3rem;
+      border: 1px solid var(--blush-deep);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      box-shadow: 0 12px 40px rgba(31, 61, 36, 0.06);
+    }
+    .order-copy h3 {
+      font-family: var(--display);
+      text-transform: lowercase;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.45rem;
+      color: var(--green);
+    }
+    .order-copy > p { color: var(--green); opacity: 0.72; font-size: 0.9rem; margin-bottom: 1rem; }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(31, 61, 36, 0.14);
+      font-size: 0.92rem;
+      color: var(--green);
+    }
+    address { font-style: normal; color: var(--muted); margin: 0.75rem 0 0.85rem; }
+    .spot a { font-weight: 600; }
+    .map-wrap {
+      border-radius: 24px;
+      overflow: hidden;
+      min-height: 240px;
+      background: rgba(247, 246, 242, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(18px) saturate(1.4);
+      -webkit-backdrop-filter: blur(18px) saturate(1.4);
+      box-shadow: 0 12px 40px rgba(31, 61, 36, 0.06);
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      border: 0;
+      display: block;
+    }
+
+    .crew {
+      margin-top: 0;
+      padding-top: 0.25rem;
+    }
+    .crew-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .crew-list li {
+      background: rgba(31, 61, 36, 0.72);
+      color: #f4f1ea;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(20px) saturate(1.45);
+      -webkit-backdrop-filter: blur(20px) saturate(1.45);
+    }
+    .crew-list .name { font-weight: 700; color: #f4f1ea; }
+    .crew-list .role {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.82rem;
+      color: var(--blush);
+    }
+    .crew-photo {
+      aspect-ratio: 1;
+      background: var(--beige);
+      overflow: hidden;
+    }
+    .crew-photo img,
+    .crew-photo .ph {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--focus, 50% 22%);
+    }
+    .crew-copy { padding: 0.95rem 1.05rem 1.05rem; }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 2rem 1.35rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-copy {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .footer-credit {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+    .footer-credit:hover { color: var(--blush-deep); }
+
+    .drawer {
+      position: fixed; inset: 0;
+      background: rgba(17,17,17,0.45);
+      z-index: 20;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      overflow: hidden;
+      transition: opacity 0.32s ease, visibility 0.32s ease;
+    }
+    .drawer.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .drawer-panel {
+      width: min(340px, 100%);
+      height: 100%;
+      background: var(--white);
+      padding: 1.4rem;
+      padding-top: max(1.4rem, env(safe-area-inset-top));
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      transform: translateX(-100%);
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .drawer.open .drawer-panel { transform: translateX(0); }
+    .drawer a {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.4rem;
+      text-transform: lowercase;
+      min-height: 48px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      opacity: 0;
+      transform: translateX(-14px);
+      transition: opacity 0.28s ease, transform 0.28s ease, color 0.2s ease;
+    }
+    .drawer.open a {
+      opacity: 1;
+      transform: none;
+    }
+    .drawer.open a:nth-of-type(1) { transition-delay: 0.08s; }
+    .drawer.open a:nth-of-type(2) { transition-delay: 0.12s; }
+    .drawer.open a:nth-of-type(3) { transition-delay: 0.16s; }
+    .drawer.open a:nth-of-type(4) { transition-delay: 0.2s; }
+    .drawer.open a:nth-of-type(5) { transition-delay: 0.24s; }
+    .drawer a.is-here { color: var(--green); }
+    .drawer a.is-here::after {
+      content: "You are here";
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blush);
+    }
+    .drawer .burger { color: #111; align-self: flex-end; }
+
+    .side-rail {
+      display: none;
+      position: fixed !important;
+      z-index: 16;
+      top: 50%;
+      right: max(2.75rem, calc(env(safe-area-inset-right) + 2.25rem));
+      left: auto;
+      width: max-content;
+      max-width: 9rem;
+      margin: 0;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-50%);
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+    }
+    .side-rail a {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      text-transform: lowercase;
+      color: color-mix(in srgb, var(--blush-deep) 58%, #c4b8b4);
+      padding: 0.1rem 0;
+      transform-origin: right center;
+      transition: color 0.2s ease, transform 0.22s ease, font-size 0.22s ease;
+    }
+    .side-rail a:hover {
+      color: var(--blush-deep);
+      transform: scale(1.08);
+    }
+    .side-rail a.is-here {
+      color: var(--green);
+      font-size: 1.55rem;
+      transform: none;
+    }
+    .side-rail a.is-here:hover { color: var(--green); }
+
+    .float-nav {
+      display: flex;
+      position: fixed !important;
+      z-index: 17;
+      top: max(0.7rem, env(safe-area-inset-top));
+      left: 50%;
+      width: max-content;
+      max-width: calc(100% - 1.25rem);
+      margin: 0;
+      align-items: center;
+      gap: 0.05rem;
+      padding: 0.3rem 0.4rem 0.3rem 0.35rem;
+      background: rgba(247, 246, 242, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 999px;
+      backdrop-filter: blur(18px) saturate(1.5);
+      -webkit-backdrop-filter: blur(18px) saturate(1.5);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateX(-50%) translateY(-10px);
+      transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.45s;
+    }
+    .float-nav.is-on {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .float-logo {
+      display: grid;
+      place-items: center;
+      padding: 0.1rem 0.55rem 0.1rem 0.35rem;
+    }
+    .float-logo img {
+      height: 30px;
+      width: auto;
+      display: block;
+    }
+    .float-nav a:not(.float-logo) {
+      font-family: var(--display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      text-transform: lowercase;
+      color: var(--muted);
+      padding: 0.48rem 0.85rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    .float-nav a:not(.float-logo):hover { color: var(--blush-deep); }
+    .float-nav a.is-here:not(.float-logo) {
+      color: #fff;
+      background: var(--green);
+    }
+
+    @media (min-width: 861px) {
+      .side-rail { display: flex; }
+      .side-rail.is-on {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+      .float-nav {
+        padding: 0.45rem 0.55rem 0.45rem 0.5rem;
+        gap: 0.12rem;
+      }
+      .float-logo { padding: 0.15rem 0.7rem 0.15rem 0.4rem; }
+      .float-logo img { height: clamp(34px, 2.6vw, 44px); }
+      .float-nav a:not(.float-logo) {
+        font-size: clamp(0.88rem, 1.05vw, 1.08rem);
+        padding: 0.68rem 1.05rem;
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .ritual, .grid-2, .order-panel { grid-template-columns: 1fr; }
+      .crew-list { grid-template-columns: 1fr 1fr; }
+      .sheet { padding: 2.5rem 1rem 1.5rem; }
+      .hero {
+        height: 100svh;
+        height: 100dvh;
+        min-height: 100svh;
+        min-height: 100dvh;
+        border-radius: 0 0 18px 22px;
+      }
+      .hero-nav { padding: 0.7rem 0.85rem; padding-top: max(0.7rem, env(safe-area-inset-top)); }
+      .hero-brand {
+        min-height: 0;
+        height: auto;
+        padding: 1rem 1rem 5.5rem;
+      }
+      .hero-brand img { height: clamp(110px, 36vw, 170px); }
+      .stats { gap: 1.5rem; padding: 0.85rem 0.9rem 1rem; font-size: 0.58rem; letter-spacing: 0.06em; }
+      .stats span { display: none; }
+      .hero-popup { max-width: 46vw; }
+      .menu-head {
+        margin: 0 0 0.65rem;
+        align-items: center;
+        gap: 0.55rem;
+      }
+      .menu-head .heading-block { margin-bottom: 0; }
+      .series-toggle { padding: 0.32rem 0.3rem; }
+      .series-toggle button { padding: 0.55rem 0.78rem; font-size: 0.68rem; }
+      .card { grid-template-columns: 96px 1fr; gap: 0.75rem; padding: 0.55rem 0.7rem 0.55rem 0.55rem; }
+      .hours-row { gap: 0.75rem; font-size: 0.86rem; }
+      .btn-green { width: 100%; }
+      .popup-card {
+        overflow: hidden;
+      }
+      .popup-card h3 {
+        font-size: clamp(1rem, 4.8vw, 1.28rem);
+        white-space: normal;
+      }
+      .popup-actions .btn-green,
+      .popup-ghost { width: auto; flex: 1 1 10rem; }
+      .series-toggle { width: 100%; }
+      .series-toggle button { flex: 1; }
+      .side-rail {
+        display: none !important;
+      }
+      .float-nav {
+        top: max(0.45rem, env(safe-area-inset-top));
+        padding: 0.4rem 0.45rem 0.4rem 0.4rem;
+        max-width: calc(100% - 0.8rem);
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      .float-nav::-webkit-scrollbar { display: none; }
+      .float-logo { padding: 0.15rem 0.45rem 0.15rem 0.3rem; }
+      .float-logo img { height: 40px; }
+      .float-nav a:not(.float-logo) {
+        font-size: 0.9rem;
+        padding: 0.7rem 0.72rem;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+      }
+      footer { padding: 1.5rem 1rem 2rem; }
+
+      .ritual { gap: 1.5rem; }
+      .featured {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        overflow-x: hidden;
+      }
+
+      .media-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 108px;
+        gap: 0.45rem;
+        margin-bottom: 1.6rem;
+      }
+      .media-grid figure {
+        min-height: 0;
+        border-radius: 16px;
+      }
+      .media-grid figure:first-child {
+        grid-column: 1 / -1;
+        grid-row: auto;
+        min-height: 150px;
+      }
+      .quote {
+        flex: 0 0 min(300px, 78vw);
+        padding: 1rem 1rem 0.9rem;
+      }
+      .quote p { font-size: 1rem; margin-bottom: 0.65rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .slide img, #menu-grid { transition: none; }
+      .quotes-track { animation: none; }
+      .quotes { overflow-x: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .drawer, .drawer-panel, .drawer a, .burger-lines span, .float-nav, .side-rail, .side-rail a,
+      .contact-drop-menu, .contact-drop-menu a, .contact-drop-btn, .btn-green, .popup-ghost, .series-toggle button {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" id="top">
+    <div class="hero-media">
+      <img src="images/hero.jpg" alt="Huni Matcha" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'" />
+      <div class="ph" style="display:none">hero.jpg</div>
+    </div>
+    <div class="hero-shade"></div>
+    <div class="hero-nav">
+      <div class="nav-cluster">
+        <button class="burger" type="button" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">
+          <span class="burger-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <a class="icon-btn" href="#menu" aria-label="Menu">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="6" height="6"/><rect x="11" y="3" width="6" height="6"/><rect x="3" y="11" width="6" height="6"/><rect x="11" y="11" width="6" height="6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-brand">
+      <img src="images/logo.png" alt="Huni Matcha" />
+      <p class="hero-tagline">Your Daily Matcha Fix</p>
+      <div class="hero-contacts">
+        <a href="https://www.facebook.com/profile.php?id=61593417922494" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/hunimatcha.cebu/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.7" fill="currentColor"/></svg>
+        </a>
+        <a href="mailto:hunimatcha@gmail.com" aria-label="Email">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 7 9-7"/></svg>
+        </a>
+        <a href="tel:+639453328342" aria-label="Phone">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.2 19.5 19.8 0 0 1-6-6 19.8 19.8 0 0 1-3.2-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.8.2 1.7.5 2.6.6a2 2 0 0 1 1.7 2.1z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="stats">
+      <div>10 handcrafted drinks<span>Matcha &amp; hojicha series</span></div>
+      <div class="hero-popup" id="hero-popup">
+        <strong id="hero-popup-place">Cebu pop-ups</strong>
+        <span id="hero-popup-when">This weekend</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer">
+    <div class="drawer-panel">
+      <button class="burger" type="button" aria-label="Close menu" aria-controls="drawer" aria-expanded="false">
+        <span class="burger-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+      <a href="#ritual">ritual</a>
+      <a href="#menu">menu</a>
+      <a href="#media">media</a>
+      <a href="#crew">crew</a>
+      <a href="#find-us">find us</a>
+    </div>
+  </div>
+
+  <nav class="float-nav" id="float-nav" aria-label="On this page">
+    <a class="float-logo" href="#top"><img src="images/logo.png" alt="Huni Matcha" /></a>
+    <a href="#ritual">ritual</a>
+    <a href="#menu">menu</a>
+    <a href="#media">media</a>
+    <a href="#crew">crew</a>
+    <a href="#find-us">find us</a>
+  </nav>
+
+  <nav class="side-rail" id="side-rail" aria-label="On this page">
+    <a href="#ritual">ritual</a>
+    <a href="#menu">menu</a>
+    <a href="#media">media</a>
+    <a href="#crew">crew</a>
+    <a href="#find-us">find us</a>
+  </nav>
+
+  <main class="sheet">
+    <section class="ritual reveal" id="ritual">
+      <div>
+        <p class="kicker">On rotation</p>
+        <h2 class="display">everyday<br>ritual</h2>
+        <p class="section-lede">Whisked-to-order matcha and roasted hojicha — cookie butter, strawberry foam, coconut cloud, and the classics. Made for matcha lovers in Cebu heat.</p>
+        <a class="btn-green" href="#find-us">Catch us</a>
+      </div>
+      <div class="featured" id="ritual-carousel">
+        <div class="carousel-track">
+          <figure class="slide side" data-pos="prev">
+            <img src="images/iced-latte.jpg" alt="" />
+          </figure>
+          <figure class="slide current" data-pos="current">
+            <img src="images/cookie-butter.jpg" alt="Cookie Butter Matcha" />
+            <span class="drink-pill" id="ritual-name">Cookie Butter Matcha</span>
+          </figure>
+          <figure class="slide side" data-pos="next">
+            <img src="images/cereal-matcha.jpeg" alt="" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="brand-rule" aria-hidden="true">
+      <span class="brand-rule-line"></span>
+      <span class="brand-mark"><img src="images/brand.png" alt="" /></span>
+      <span class="brand-rule-line"></span>
+    </div>
+
+    <section class="reveal" id="menu">
+      <div class="menu-head">
+        <div class="heading-block">
+          <p class="kicker">Matcha &amp; hojicha</p>
+          <h2 class="display">menu</h2>
+        </div>
+        <div class="series-toggle" role="tablist" aria-label="Menu series">
+          <button type="button" data-filter="all" class="is-on">All</button>
+          <button type="button" data-filter="matcha">Matcha</button>
+          <button type="button" data-filter="hojicha">Hojicha</button>
+        </div>
+      </div>
+      <div class="grid-2" id="menu-grid">
+        <article class="card" data-series="matcha">
+          <div class="card-img"><img src="images/cookie-butter.jpg" alt="Cookie Butter Matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
+          <div>
+            <h3>Cookie Butter</h3>
+            <p class="desc">Biscoff blended into creamy matcha, cookie crumble on top.</p>
+            <p class="price">₱260</p>
+          </div>
+        </article>
+        <article class="card" data-series="matcha">
+          <div class="card-img"><img src="images/strawberry-foam.jpg" alt="Strawberry Foam Matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
+          <div>
+            <h3>Strawberry Foam</h3>
+            <p class="desc">Smooth latte under a sweet strawberry cloud.</p>
+            <p class="price">₱260</p>
+          </div>
+        </article>
+        <article class="card" data-series="matcha">
+          <div class="card-img"><img src="images/coconut-cloud.jpg" alt="Coconut Cloud Matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
+          <div>
+            <h3>Coconut Cloud</h3>
+            <p class="desc">Light coconut foam over iced matcha.</p>
+            <p class="price">₱261</p>
+          </div>
+        </article>
+        <article class="card" data-series="matcha">
+          <div class="card-img"><img src="images/iced-latte.jpg" alt="Iced Matcha Latte" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
+          <div>
+            <h3>Iced Matcha Latte</h3>
+            <p class="desc">Classic iced matcha and creamy milk.</p>
+            <p class="price">₱230</p>
+          </div>
+        </article>
+        <article class="card" data-series="matcha">
+          <div class="card-img"><img src="images/cereal-matcha.jpeg" alt="Cereal Milk Matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
+          <div>
+            <h3>Cereal Milk</h3>
+            <p class="desc">Cereal-sweet latte with a crunchy topping.</p>
+            <p class="price">₱261</p>
+          </div>
+        </article>
+        <article class="card" data-series="matcha">
+          <div class="card-img"><img src="images/ube-foam.jpg" alt="Ube Foam Matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
+          <div>
+            <h3>Ube Foam</h3>
+            <p class="desc">Creamy matcha, smooth ube foam.</p>
+            <p class="price">₱250</p>
+          </div>
+        </article>
+        <article class="card" data-series="matcha">
+          <div class="card-img"><img src="images/seasalt-matcha.jpg" alt="Seasalt Matcha Latte" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
+          <div>
+            <h3>Seasalt Matcha Latte</h3>
+            <p class="desc">Sea-salt cream for a sweet-and-salty finish.</p>
+            <p class="price">₱230</p>
+          </div>
+        </article>
+        <article class="card" data-series="hojicha">
+          <div class="card-img"><img src="images/classic-hojicha.jpg" alt="Classic Hojicha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
+          <div>
+            <h3>Classic Hojicha</h3>
+            <p class="desc">Roasted, nutty, naturally rich.</p>
+            <p class="price">₱230</p>
+          </div>
+        </article>
+        <article class="card" data-series="hojicha">
+          <div class="card-img"><img src="images/seasalt-hojicha.jpg" alt="Seasalt Hojicha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
+          <div>
+            <h3>Seasalt Hojicha</h3>
+            <p class="desc">Roasted hojicha under sea-salt foam.</p>
+            <p class="price">₱260</p>
+          </div>
+        </article>
+        <article class="card" data-series="hojicha">
+          <div class="card-img"><img src="images/cookie-butter-hojicha.jpg" alt="Cookie Butter Hojicha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
+          <div>
+            <h3>Cookie Butter Hojicha</h3>
+            <p class="desc">Hojicha blended with Biscoff and cookie crumble.</p>
+            <p class="price">₱260</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="brand-rule" aria-hidden="true">
+      <span class="brand-rule-line"></span>
+      <span class="brand-mark"><img src="images/brand.png" alt="" /></span>
+      <span class="brand-rule-line"></span>
+    </div>
+
+    <section class="quotes-block reveal" id="sips">
+      <div class="heading-block quotes-head">
+        <p class="kicker">Heard after a sip</p>
+        <h2 class="display">aftersips</h2>
+        <p class="section-lede">First cups, second rounds, and the people who came back for both.</p>
+      </div>
+      <div class="quotes" id="quotes"></div>
+    </section>
+
+    <div class="brand-rule" aria-hidden="true">
+      <span class="brand-rule-line"></span>
+      <span class="brand-mark"><img src="images/brand.png" alt="" /></span>
+      <span class="brand-rule-line"></span>
+    </div>
+
+    <section class="media-block reveal" id="media">
+      <div class="heading-block">
+        <p class="kicker">From the stall</p>
+        <h2 class="display">media</h2>
+        <p class="section-lede">Stall light, whisked shots, and the drinks as they land in Cebu.</p>
+      </div>
+      <div class="media-grid">
+        <figure><img src="images/lifestyle.jpg" alt="Friends with Huni Matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'lifestyle'}))" /></figure>
+        <figure><img src="images/hero.jpg" alt="Huni Matcha pop-up" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'hero'}))" /></figure>
+        <figure><img src="images/cookie-butter.jpg" alt="Cookie Butter Matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'drink'}))" /></figure>
+        <figure><img src="images/powder-1.jpg" alt="Matcha powder" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'powder'}))" /></figure>
+        <figure><img src="images/layer-whisked.jpg" alt="Whisked matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'whisk'}))" /></figure>
+      </div>
+    </section>
+
+    <div class="brand-rule" aria-hidden="true">
+      <span class="brand-rule-line"></span>
+      <span class="brand-mark"><img src="images/brand.png" alt="" /></span>
+      <span class="brand-rule-line"></span>
+    </div>
+
+    <section class="crew reveal" id="crew">
+      <div class="heading-block">
+        <p class="kicker">Behind the whisk</p>
+        <h2 class="display">the crew</h2>
+        <p class="section-lede">The people who keep every pop-up whisked, plated, and on time.</p>
+      </div>
+      <ul class="crew-list">
+        <li>
+          <div class="crew-photo" style="--focus: 50% 20%"><img src="images/team-mariella.jpg" alt="Mariella Sala" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'Mariella'}))" /></div>
+          <div class="crew-copy">
+            <span class="name">Mariella Sala</span>
+            <span class="role">General Manager / Marketing</span>
+          </div>
+        </li>
+        <li>
+          <div class="crew-photo" style="--focus: 50% 18%"><img src="images/team-jhave.jpg" alt="Jhave Punzalan" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'Jhave'}))" /></div>
+          <div class="crew-copy">
+            <span class="name">Jhave Punzalan</span>
+            <span class="role">Finance Manager</span>
+          </div>
+        </li>
+        <li>
+          <div class="crew-photo" style="--focus: 50% 22%"><img src="images/team-patricia.jpg" alt="Patricia Diola" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'Patricia'}))" /></div>
+          <div class="crew-copy">
+            <span class="name">Patricia Diola</span>
+            <span class="role">Operations Manager</span>
+          </div>
+        </li>
+        <li>
+          <div class="crew-photo" style="--focus: 50% 18%"><img src="images/team-alqayed.jpg" alt="Alqayed Sakandal" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'Alqayed'}))" /></div>
+          <div class="crew-copy">
+            <span class="name">Alqayed Sakandal</span>
+            <span class="role">HR Manager</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <div class="brand-rule" aria-hidden="true">
+      <span class="brand-rule-line"></span>
+      <span class="brand-mark"><img src="images/brand.png" alt="" /></span>
+      <span class="brand-rule-line"></span>
+    </div>
+
+    <section class="spot reveal" id="find-us">
+      <div class="heading-block">
+        <p class="kicker">Cebu pop-ups</p>
+        <h2 class="display">catch us</h2>
+      </div>
+      <div class="popup-card" id="next-popup"></div>
+      <div class="order-panel">
+        <div class="order-copy">
+          <h3>Order window</h3>
+          <p>No walk-in café yet — we pop up around Cebu. These hours are when we take pickup and delivery orders from the kitchen in Guadalupe.</p>
+          <div class="hours-row"><span>Monday – Friday</span><span>10:00 AM – 9:00 PM</span></div>
+          <div class="hours-row"><span>Saturday</span><span>10:00 AM – 10:00 PM</span></div>
+          <div class="hours-row"><span>Sunday</span><span>10:00 AM – 10:00 PM</span></div>
+          <address>
+            Nichols Heights, Guadalupe<br />
+            Cebu City, Cebu 6000
+          </address>
+          <div class="contact-drop">
+            <button class="contact-drop-btn" type="button" aria-expanded="false" aria-haspopup="true">
+              Contact
+              <svg class="drop-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+            </button>
+            <div class="contact-drop-menu">
+              <a href="https://www.facebook.com/profile.php?id=61593417922494" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+              <a href="https://www.instagram.com/hunimatcha.cebu/" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.7" fill="currentColor"/></svg>
+              </a>
+              <a href="mailto:hunimatcha@gmail.com" aria-label="Email">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 7 9-7"/></svg>
+              </a>
+              <a href="tel:+639453328342" aria-label="Phone">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.2 19.5 19.8 0 0 1-6-6 19.8 19.8 0 0 1-3.2-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.8.2 1.7.5 2.6.6a2 2 0 0 1 1.7 2.1z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <iframe
+            title="Huni Matcha kitchen on Google Maps"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://maps.google.com/maps?q=Symfoni%20Nichols%20Guadalupe%20Cebu%20City&z=16&output=embed">
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="footer-copy">© <span id="year"></span> Huni Matcha</p>
+    <a class="footer-credit" href="https://nichoblina.github.io" target="_blank" rel="noopener">Crafted by Nicholai Oblina</a>
+  </footer>
+  <script src="scripts/testimonials.js"></script>
+  <script src="scripts/popups.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    (function () {
+      var drops = document.querySelectorAll(".contact-drop");
+      function closeAll(except) {
+        drops.forEach(function (drop) {
+          if (drop === except) return;
+          drop.classList.remove("is-open");
+          var btn = drop.querySelector(".contact-drop-btn");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+        });
+      }
+      drops.forEach(function (drop) {
+        var btn = drop.querySelector(".contact-drop-btn");
+        if (!btn) return;
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var open = !drop.classList.contains("is-open");
+          closeAll(open ? drop : null);
+          drop.classList.toggle("is-open", open);
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+      });
+      document.addEventListener("click", function () { closeAll(); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeAll();
+      });
+    })();
+
+    (function () {
+      var drinks = [
+        { src: "images/cookie-butter.jpg", name: "Cookie Butter Matcha" },
+        { src: "images/cereal-matcha.jpeg", name: "Cereal Milk Matcha" },
+        { src: "images/iced-latte.jpg", name: "Iced Matcha Latte" }
+      ];
+      var i = 0;
+      var prevImg = document.querySelector('[data-pos="prev"] img');
+      var currImg = document.querySelector('[data-pos="current"] img');
+      var nextImg = document.querySelector('[data-pos="next"] img');
+      var label = document.getElementById("ritual-name");
+      var track = document.querySelector(".carousel-track");
+
+      function at(n) {
+        return drinks[(i + n + drinks.length) % drinks.length];
+      }
+      function render() {
+        var prev = at(-1), curr = at(0), next = at(1);
+        prevImg.src = prev.src;
+        currImg.src = curr.src;
+        currImg.alt = curr.name;
+        nextImg.src = next.src;
+        label.textContent = curr.name;
+      }
+      drinks.forEach(function (d) { var p = new Image(); p.src = d.src; });
+      render();
+
+      function go(step) {
+        if (track.classList.contains("going-next") || track.classList.contains("going-prev")) return;
+        track.classList.add(step > 0 ? "going-next" : "going-prev");
+        setTimeout(function () {
+          i = (i + step + drinks.length) % drinks.length;
+          render();
+          requestAnimationFrame(function () {
+            track.classList.remove("going-next", "going-prev");
+          });
+        }, window.matchMedia("(min-width: 861px)").matches ? 200 : 320);
+      }
+
+      document.querySelector('[data-pos="prev"]').addEventListener("click", function () { go(-1); });
+      document.querySelector('[data-pos="next"]').addEventListener("click", function () { go(1); });
+
+      var startX = 0;
+      track.addEventListener("touchstart", function (e) {
+        startX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      track.addEventListener("touchend", function (e) {
+        var dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+      });
+
+      setInterval(function () { go(1); }, 4500);
+    })();
+
+    (function () {
+      var buttons = document.querySelectorAll(".series-toggle button");
+      var cards = document.querySelectorAll("#menu-grid .card");
+      var grid = document.getElementById("menu-grid");
+      buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (btn.classList.contains("is-on")) return;
+          buttons.forEach(function (b) { b.classList.remove("is-on"); });
+          btn.classList.add("is-on");
+          var filter = btn.getAttribute("data-filter");
+          grid.classList.add("is-fading");
+          setTimeout(function () {
+            cards.forEach(function (card) {
+              var show = filter === "all" || card.getAttribute("data-series") === filter;
+              card.hidden = !show;
+            });
+            grid.classList.remove("is-fading");
+          }, 280);
+        });
+      });
+    })();
+
+    (function () {
+      var nodes = document.querySelectorAll(".reveal");
+      if (!nodes.length) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        nodes.forEach(function (el) { el.classList.add("in"); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+      nodes.forEach(function (el) { io.observe(el); });
+    })();
+
+    (function () {
+      var ids = ["ritual", "menu", "media", "crew", "find-us"];
+      var hero = document.getElementById("top");
+      var rail = document.getElementById("side-rail");
+      var drawer = document.getElementById("drawer");
+      var burgers = document.querySelectorAll(".burger");
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      function headingTop(id) {
+        var el = document.getElementById(id);
+        if (!el) return 0;
+        var mark = el.querySelector(".kicker") || el.querySelector("h2") || el;
+        return Math.max(0, mark.getBoundingClientRect().top + window.scrollY - 16);
+      }
+
+      function setDrawer(open) {
+        if (!drawer) return;
+        drawer.classList.toggle("open", open);
+        document.body.style.overflow = open ? "hidden" : "";
+        burgers.forEach(function (btn) {
+          btn.classList.toggle("is-open", open);
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        });
+      }
+
+      burgers.forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          setDrawer(!drawer.classList.contains("open"));
+        });
+      });
+      if (drawer) {
+        drawer.addEventListener("click", function (e) {
+          if (e.target === drawer) setDrawer(false);
+        });
+      }
+
+      function goTo(id, e) {
+        if (e) e.preventDefault();
+        setDrawer(false);
+        window.scrollTo({
+          top: headingTop(id),
+          behavior: reduce.matches ? "auto" : "smooth"
+        });
+        if (history.replaceState) history.replaceState(null, "", "#" + id);
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        var id = (a.getAttribute("href") || "").slice(1);
+        if (ids.indexOf(id) === -1) return;
+        a.addEventListener("click", function (e) { goTo(id, e); });
+      });
+
+      var floatNav = document.getElementById("float-nav");
+      var sheet = document.querySelector("main.sheet");
+      var pastHero = false;
+
+      function railWouldOverlap() {
+        if (!sheet) return false;
+        var gutter = window.innerWidth - sheet.getBoundingClientRect().right;
+        return gutter < 220;
+      }
+
+      function syncChrome() {
+        var desktop = window.matchMedia("(min-width: 861px)").matches;
+        if (hero) {
+          pastHero = hero.getBoundingClientRect().bottom < 80;
+        } else {
+          pastHero = window.scrollY > 80;
+        }
+        var overlap = desktop && railWouldOverlap();
+        if (rail) rail.classList.toggle("is-on", pastHero && desktop && !overlap);
+        if (floatNav) floatNav.classList.toggle("is-on", pastHero && (!desktop || overlap));
+      }
+
+      function markHere(id) {
+        document.querySelectorAll(".side-rail a, .drawer a, .float-nav a").forEach(function (link) {
+          link.classList.toggle("is-here", link.getAttribute("href") === "#" + id);
+        });
+        syncChrome();
+      }
+
+      var spy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          markHere(entry.target.id);
+        });
+      }, { rootMargin: "-18% 0px -62% 0px", threshold: 0 });
+      ids.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) spy.observe(el);
+      });
+
+      window.addEventListener("scroll", syncChrome, { passive: true });
+      window.addEventListener("resize", syncChrome);
+      syncChrome();
+    })();
+  </script>
+</body>
+</html>
