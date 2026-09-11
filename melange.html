@@ -498,6 +498,35 @@
       background: var(--beige);
     }
     .card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+    .best-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.22rem;
+      flex-shrink: 0;
+      background: var(--blush-deep);
+      color: var(--green);
+      font-family: var(--sans);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: lowercase;
+      line-height: 1;
+      padding: 0.28rem 0.5rem 0.28rem 0.38rem;
+      border-radius: 999px;
+    }
+    .best-badge svg {
+      display: block;
+      width: 0.7rem;
+      height: 0.7rem;
+      flex-shrink: 0;
+    }
     .card h3 {
       font-family: var(--display);
       font-size: 1.05rem;
@@ -1176,7 +1205,7 @@
       </div>
     </div>
     <div class="stats">
-      <div>10 handcrafted drinks<span>Matcha &amp; hojicha series</span></div>
+      <div><span id="drink-count">10</span> handcrafted drinks<span>Matcha &amp; hojicha series</span></div>
       <div class="hero-popup" id="hero-popup">
         <strong id="hero-popup-place">Cebu pop-ups</strong>
         <span id="hero-popup-when">This weekend</span>
@@ -1255,88 +1284,7 @@
           <button type="button" data-filter="hojicha">Hojicha</button>
         </div>
       </div>
-      <div class="grid-2" id="menu-grid">
-        <article class="card" data-series="matcha">
-          <div class="card-img"><img src="images/cookie-butter.jpg" alt="Cookie Butter Matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
-          <div>
-            <h3>Cookie Butter</h3>
-            <p class="desc">Biscoff blended into creamy matcha, cookie crumble on top.</p>
-            <p class="price">₱260</p>
-          </div>
-        </article>
-        <article class="card" data-series="matcha">
-          <div class="card-img"><img src="images/strawberry-foam.jpg" alt="Strawberry Foam Matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
-          <div>
-            <h3>Strawberry Foam</h3>
-            <p class="desc">Smooth latte under a sweet strawberry cloud.</p>
-            <p class="price">₱260</p>
-          </div>
-        </article>
-        <article class="card" data-series="matcha">
-          <div class="card-img"><img src="images/coconut-cloud.jpg" alt="Coconut Cloud Matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
-          <div>
-            <h3>Coconut Cloud</h3>
-            <p class="desc">Light coconut foam over iced matcha.</p>
-            <p class="price">₱261</p>
-          </div>
-        </article>
-        <article class="card" data-series="matcha">
-          <div class="card-img"><img src="images/iced-latte.jpg" alt="Iced Matcha Latte" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
-          <div>
-            <h3>Iced Matcha Latte</h3>
-            <p class="desc">Classic iced matcha and creamy milk.</p>
-            <p class="price">₱230</p>
-          </div>
-        </article>
-        <article class="card" data-series="matcha">
-          <div class="card-img"><img src="images/cereal-matcha.jpeg" alt="Cereal Milk Matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
-          <div>
-            <h3>Cereal Milk</h3>
-            <p class="desc">Cereal-sweet latte with a crunchy topping.</p>
-            <p class="price">₱261</p>
-          </div>
-        </article>
-        <article class="card" data-series="matcha">
-          <div class="card-img"><img src="images/ube-foam.jpg" alt="Ube Foam Matcha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
-          <div>
-            <h3>Ube Foam</h3>
-            <p class="desc">Creamy matcha, smooth ube foam.</p>
-            <p class="price">₱250</p>
-          </div>
-        </article>
-        <article class="card" data-series="matcha">
-          <div class="card-img"><img src="images/seasalt-matcha.jpg" alt="Seasalt Matcha Latte" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
-          <div>
-            <h3>Seasalt Matcha Latte</h3>
-            <p class="desc">Sea-salt cream for a sweet-and-salty finish.</p>
-            <p class="price">₱230</p>
-          </div>
-        </article>
-        <article class="card" data-series="hojicha">
-          <div class="card-img"><img src="images/classic-hojicha.jpg" alt="Classic Hojicha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
-          <div>
-            <h3>Classic Hojicha</h3>
-            <p class="desc">Roasted, nutty, naturally rich.</p>
-            <p class="price">₱230</p>
-          </div>
-        </article>
-        <article class="card" data-series="hojicha">
-          <div class="card-img"><img src="images/seasalt-hojicha.jpg" alt="Seasalt Hojicha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
-          <div>
-            <h3>Seasalt Hojicha</h3>
-            <p class="desc">Roasted hojicha under sea-salt foam.</p>
-            <p class="price">₱260</p>
-          </div>
-        </article>
-        <article class="card" data-series="hojicha">
-          <div class="card-img"><img src="images/cookie-butter-hojicha.jpg" alt="Cookie Butter Hojicha" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'photo'}))" /></div>
-          <div>
-            <h3>Cookie Butter Hojicha</h3>
-            <p class="desc">Hojicha blended with Biscoff and cookie crumble.</p>
-            <p class="price">₱260</p>
-          </div>
-        </article>
-      </div>
+      <div class="grid-2" id="menu-grid"></div>
     </section>
 
     <section class="quotes-block reveal" id="sips">
@@ -1496,6 +1444,7 @@
   </footer>
   <script src="scripts/testimonials.js"></script>
   <script src="scripts/popups.js"></script>
+  <script src="scripts/drinks.js"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -1524,60 +1473,6 @@
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") closeAll();
       });
-    })();
-
-    (function () {
-      var drinks = [
-        { src: "images/cookie-butter.jpg", name: "Cookie Butter Matcha" },
-        { src: "images/cereal-matcha.jpeg", name: "Cereal Milk Matcha" },
-        { src: "images/iced-latte.jpg", name: "Iced Matcha Latte" }
-      ];
-      var i = 0;
-      var prevImg = document.querySelector('[data-pos="prev"] img');
-      var currImg = document.querySelector('[data-pos="current"] img');
-      var nextImg = document.querySelector('[data-pos="next"] img');
-      var label = document.getElementById("ritual-name");
-      var track = document.querySelector(".carousel-track");
-
-      function at(n) {
-        return drinks[(i + n + drinks.length) % drinks.length];
-      }
-      function render() {
-        var prev = at(-1), curr = at(0), next = at(1);
-        prevImg.src = prev.src;
-        currImg.src = curr.src;
-        currImg.alt = curr.name;
-        nextImg.src = next.src;
-        label.textContent = curr.name;
-      }
-      drinks.forEach(function (d) { var p = new Image(); p.src = d.src; });
-      render();
-
-      function go(step) {
-        if (track.classList.contains("going-next") || track.classList.contains("going-prev")) return;
-        track.classList.add(step > 0 ? "going-next" : "going-prev");
-        setTimeout(function () {
-          i = (i + step + drinks.length) % drinks.length;
-          render();
-          requestAnimationFrame(function () {
-            track.classList.remove("going-next", "going-prev");
-          });
-        }, window.matchMedia("(min-width: 861px)").matches ? 200 : 320);
-      }
-
-      document.querySelector('[data-pos="prev"]').addEventListener("click", function () { go(-1); });
-      document.querySelector('[data-pos="next"]').addEventListener("click", function () { go(1); });
-
-      var startX = 0;
-      track.addEventListener("touchstart", function (e) {
-        startX = e.changedTouches[0].clientX;
-      }, { passive: true });
-      track.addEventListener("touchend", function (e) {
-        var dx = e.changedTouches[0].clientX - startX;
-        if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
-      });
-
-      setInterval(function () { go(1); }, 4500);
     })();
 
     (function () {
