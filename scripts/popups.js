@@ -20,8 +20,8 @@ window.HUNI_COMING_SOON = {
   note: "No public stall date yet. Follow us on Instagram for updates when the next pop-up drops.",
   ctaLabel: "hunimatcha.cebu",
   ctaHref: "https://www.instagram.com/hunimatcha.cebu/",
-  heroPlace: "Coming soon",
-  heroWhen: "Follow us on Instagram"
+  heroPlace: "Next pop-up",
+  heroWhen: "Coming soon"
 };
 
 window.HUNI_POPUPS = [];
@@ -101,8 +101,8 @@ window.HUNI_POPUPS = [];
   function paintHero() {
     if (!heroPlace) return;
     if (!heroList.length) {
-      heroPlace.textContent = soon.heroPlace || "Coming soon";
-      if (heroWhen) heroWhen.textContent = soon.heroWhen || "Next stall TBA";
+      heroPlace.textContent = soon.heroPlace || "Next pop-up";
+      if (heroWhen) heroWhen.textContent = soon.heroWhen || "Coming soon";
       return;
     }
     var p = heroList[i % heroList.length];

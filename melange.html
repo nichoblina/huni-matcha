@@ -254,6 +254,7 @@
       z-index: 2;
       display: flex;
       justify-content: center;
+      align-items: flex-start;
       gap: 3.5rem;
       padding: 1.25rem 1.5rem 1.5rem;
       font-size: 0.72rem;
@@ -262,7 +263,13 @@
       text-transform: uppercase;
       text-align: center;
     }
-    .stats span { display: block; opacity: 0.7; font-size: 0.62rem; margin-top: 0.2rem; letter-spacing: 0.08em; }
+    .stat-sub {
+      display: block;
+      opacity: 0.7;
+      font-size: 0.62rem;
+      margin-top: 0.2rem;
+      letter-spacing: 0.08em;
+    }
     .hero-popup {
       max-width: 16rem;
       transition: opacity 0.35s ease;
@@ -1052,7 +1059,7 @@
       }
       .hero-brand img { height: clamp(110px, 36vw, 170px); }
       .stats { gap: 1.5rem; padding: 0.85rem 0.9rem 1rem; font-size: 0.58rem; letter-spacing: 0.06em; }
-      .stats span { display: none; }
+      .stat-sub { display: none; }
       .hero-popup { max-width: 46vw; }
       .menu-head {
         margin: 0 0 0.65rem;
@@ -1207,10 +1214,10 @@
       </div>
     </div>
     <div class="stats">
-      <div><span id="drink-count">10</span> handcrafted drinks<span>Matcha &amp; hojicha series</span></div>
+      <div><span id="drink-count">10</span> handcrafted drinks<span class="stat-sub">Matcha &amp; hojicha series</span></div>
       <div class="hero-popup" id="hero-popup">
-        <strong id="hero-popup-place">Cebu pop-ups</strong>
-        <span id="hero-popup-when">This weekend</span>
+        <strong id="hero-popup-place">Next pop-up</strong>
+        <span class="stat-sub" id="hero-popup-when">Coming soon</span>
       </div>
     </div>
   </header>

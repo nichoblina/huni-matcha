@@ -21,7 +21,7 @@ window.HUNI_POPUPS = [
 
 **No date yet:** leave `HUNI_POPUPS` empty (`[]`). Catch us and the hero switch to the Coming soon card.
 
-Coming soon copy lives in `HUNI_COMING_SOON` in the same file (title, note, Instagram button, hero line). Default note asks people to follow Instagram for updates. You can also force the card with `comingSoon: true` on a popup object.
+Coming soon copy lives in `HUNI_COMING_SOON` in the same file (title, note, Instagram button). Hero reads **Next pop-up** / **Coming soon**. You can also force the card with `comingSoon: true` on a popup object.
 
 ## Drinks / menu — `scripts/drinks.js`
 
