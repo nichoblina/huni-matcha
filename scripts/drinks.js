@@ -35,7 +35,7 @@ window.HUNI_DRINKS = [
     name: "Coconut Cloud",
     series: "matcha",
     desc: "Light coconut foam over iced matcha.",
-    price: 261,
+    price: 289,
     src: "images/coconut-cloud.jpg"
   },
   {
@@ -50,7 +50,7 @@ window.HUNI_DRINKS = [
     name: "Cereal Milk",
     series: "matcha",
     desc: "Cereal-sweet latte with a crunchy topping.",
-    price: 261,
+    price: 260,
     src: "images/cereal-matcha.jpeg",
     label: "Cereal Milk Matcha",
     featured: true,
@@ -67,7 +67,7 @@ window.HUNI_DRINKS = [
     name: "Seasalt Matcha Latte",
     series: "matcha",
     desc: "Sea-salt cream for a sweet-and-salty finish.",
-    price: 230,
+    price: 261,
     src: "images/seasalt-matcha.jpg",
     bestSeller: true
   },
