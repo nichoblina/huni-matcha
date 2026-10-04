@@ -146,7 +146,6 @@
       height: clamp(150px, 32vw, 260px);
       width: auto;
       margin: 0 auto;
-      filter: brightness(0) invert(1);
     }
     .hero-tagline {
       margin: -0.7rem 0 0;
@@ -1196,7 +1195,7 @@
       </div>
     </div>
     <div class="hero-brand">
-      <img src="images/logo.png" alt="Huni Matcha" />
+      <img src="images/logo-hero.png" alt="Huni Matcha" />
       <p class="hero-tagline">Your Daily Matcha Fix</p>
       <div class="hero-contacts">
         <a href="https://www.facebook.com/profile.php?id=61593417922494" target="_blank" rel="noopener" aria-label="Facebook">
@@ -1451,10 +1450,12 @@
       <a class="footer-credit" href="https://nichoblina.github.io" target="_blank" rel="noopener">Crafted by Nicholai Oblina</a>
     </div>
   </footer>
+  <script src="scripts/media.js"></script>
   <script src="scripts/testimonials.js"></script>
   <script src="scripts/popups.js"></script>
   <script src="scripts/drinks.js"></script>
   <script>
+    if (window.huniBindMedia) window.huniBindMedia();
     document.getElementById("year").textContent = new Date().getFullYear();
 
     (function () {

@@ -38,7 +38,7 @@ Add or edit objects in `HUNI_DRINKS`. The menu grid, hero drink count, and Every
 | `featured` | `true` = Everyday Ritual rotator |
 | `bestSeller` | Marks the drink; pill is off until `HUNI_SHOW_BEST_SELLERS` is `true` |
 
-Drop new photos in `images/` and point `src` at the filename.
+Drop new photos in `images/` and point `src` at the filename. After Cloudflare R2 is on, set `HUNI_MEDIA` in `scripts/media.js` to the public folder URL; drink cards, the carousel, and page photos (not logos/favicon) will load from there.
 
 ## Aftersips (reviews) — `scripts/testimonials.js`
 

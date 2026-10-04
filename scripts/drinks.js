@@ -7,7 +7,7 @@
  * series     — "matcha" or "hojicha" (menu toggle)
  * desc       — one-line description
  * price      — number (shown as ₱) or a string
- * src        — image path in /images
+ * src        — image path in /images (rewritten by HUNI_MEDIA when R2 is on)
  * label      — optional longer name for the carousel pill
  * featured   — true to include in Everyday Ritual
  * bestSeller — true to mark a drink; pill is off until SHOW_BEST_SELLERS is true
@@ -114,6 +114,10 @@ window.HUNI_DRINKS = [
     return drink.label || drink.name || "Huni Matcha drink";
   }
 
+  function src(path) {
+    return window.huniSrc ? window.huniSrc(path) : path;
+  }
+
   var count = document.getElementById("drink-count");
   if (count && drinks.length) count.textContent = String(drinks.length);
 
@@ -126,7 +130,7 @@ window.HUNI_DRINKS = [
       return (
         '<article class="card" data-series="' + esc(drink.series) + '">' +
           '<div class="card-img">' +
-            '<img src="' + esc(drink.src) + '" alt="' + esc(altText(drink)) + '" onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'ph\',textContent:\'photo\'}))" />' +
+            '<img src="' + esc(src(drink.src)) + '" alt="' + esc(altText(drink)) + '" onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'ph\',textContent:\'photo\'}))" />' +
           "</div>" +
           "<div>" +
             '<div class="card-title"><h3>' + esc(drink.name) + "</h3>" + badge + "</div>" +
@@ -158,16 +162,16 @@ window.HUNI_DRINKS = [
     var prev = at(-1);
     var curr = at(0);
     var next = at(1);
-    prevImg.src = prev.src;
-    currImg.src = curr.src;
+    prevImg.src = src(prev.src);
+    currImg.src = src(curr.src);
     currImg.alt = altText(curr);
-    nextImg.src = next.src;
+    nextImg.src = src(next.src);
     label.textContent = curr.label || curr.name;
   }
 
   featured.forEach(function (d) {
     var p = new Image();
-    p.src = d.src;
+    p.src = src(d.src);
   });
   render();
 
