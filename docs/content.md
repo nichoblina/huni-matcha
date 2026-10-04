@@ -4,7 +4,7 @@ Live page is `index.html` (GitHub Pages). Edit the matching file below, then ref
 
 ## Next pop-up — `scripts/popups.js`
 
-**Booked stall:** put it in `HUNI_POPUPS`. The first item is the Catch us card. Extra items rotate in the hero.
+**Booked stall(s):** add every date to `HUNI_POPUPS`, soonest first. Catch us shows one card each (first is **Next pop-up**, the rest **Then**). The hero rotates through them.
 
 ```js
 window.HUNI_POPUPS = [
@@ -12,12 +12,15 @@ window.HUNI_POPUPS = [
     venue: "Venue name",
     street: "Street, city",
     date: "October 4–5",
+    until: "2026-10-05",
     mapsUrl: "https://maps.google.com/?q=Venue+Name+Cebu",
     ctaLabel: "Venue Instagram",
     ctaHref: "https://www.instagram.com/thevenue/"
   }
 ];
 ```
+
+`until` is the last day (`YYYY-MM-DD`). After that, the stall drops off by itself. Skip `until` if you want to take it down by hand.
 
 **No date yet:** leave `HUNI_POPUPS` empty (`[]`). Catch us and the hero switch to the Coming soon card.
 

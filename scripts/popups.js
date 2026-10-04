@@ -1,18 +1,18 @@
 /**
  * Next Huni Matcha pop-up(s)
- * Edit HUNI_POPUPS when a stall is booked. The first item is featured as “next.”
- * Extra entries rotate in the hero (same idea as testimonials).
+ * Add every booked stall to HUNI_POPUPS, soonest first.
+ * Catch us renders a card per live stall. The hero rotates them.
  *
- * Leave HUNI_POPUPS empty — or set comingSoon: true on an item — to show
- * the Coming soon card. Tweak copy in HUNI_COMING_SOON.
+ * Leave the list empty — or set comingSoon: true — for the Coming soon card.
  *
- * venue     — location name (shown large)
- * street    — street / area
- * date      — when
- * mapsUrl   — Google Maps search/link
- * ctaLabel  — Instagram button text
- * ctaHref   — venue Instagram
- * comingSoon — true to force the Coming soon card instead of a date
+ * venue      — location name (shown large)
+ * street     — street / area
+ * date       — display date (e.g. "October 4–5")
+ * until      — last day as YYYY-MM-DD; after that the stall drops off by itself
+ * mapsUrl    — Google Maps search/link
+ * ctaLabel   — Instagram button text
+ * ctaHref    — venue Instagram
+ * comingSoon — true to force Coming soon instead of a date
  */
 window.HUNI_COMING_SOON = {
   label: "Next pop-up",
@@ -24,14 +24,48 @@ window.HUNI_COMING_SOON = {
   heroWhen: "Coming soon"
 };
 
-window.HUNI_POPUPS = [];
+window.HUNI_POPUPS = [
+  {
+    venue: "Ukay Ta Bai",
+    street: "Vibo Place Escario",
+    date: "October 2–4 · 3PM – 11PM",
+    until: "2026-10-04",
+    mapsUrl: "https://maps.google.com/?q=Vibo%20Place%20Escario%20Cebu",
+    ctaLabel: "hunimatcha.cebu",
+    ctaHref: "https://www.instagram.com/hunimatcha.cebu/"
+  },
+  {
+    venue: "Raketz Cebu 2026",
+    street: "Ayala Center Cebu, Activity Center · Booth R7",
+    date: "October 10–11 · Mall hours",
+    until: "2026-10-11",
+    mapsUrl: "https://maps.google.com/?q=Ayala%20Center%20Cebu%20Activity%20Center",
+    ctaLabel: "hunimatcha.cebu",
+    ctaHref: "https://www.instagram.com/hunimatcha.cebu/"
+  },
+  {
+    venue: "USC Days",
+    street: "University of San Carlos – Main Campus",
+    date: "October 19–23 · 9AM – 5PM",
+    until: "2026-10-23",
+    mapsUrl: "https://maps.google.com/?q=University%20of%20San%20Carlos%20Main%20Campus%20Cebu",
+    ctaLabel: "hunimatcha.cebu",
+    ctaHref: "https://www.instagram.com/hunimatcha.cebu/"
+  },
+  {
+    venue: "Burn Wellness x Temple of Leah",
+    street: "Temple of Leah · Barre, Pilates, Yoga, and Art Workshops",
+    date: "October 29–31 · 7AM – 7PM",
+    until: "2026-10-31",
+    mapsUrl: "https://maps.google.com/?q=Temple%20of%20Leah%20Cebu",
+    ctaLabel: "hunimatcha.cebu",
+    ctaHref: "https://www.instagram.com/hunimatcha.cebu/"
+  }
+];
 
 (function () {
   var root = document.getElementById("next-popup");
-  var list = window.HUNI_POPUPS || [];
   var soon = window.HUNI_COMING_SOON || {};
-  var next = list[0];
-  var showSoon = !next || next.comingSoon;
 
   function esc(value) {
     return String(value || "")
@@ -40,6 +74,17 @@ window.HUNI_POPUPS = [];
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
   }
+
+  function stillOn(item) {
+    if (!item || item.comingSoon) return false;
+    if (!item.until) return true;
+    var end = new Date(String(item.until) + "T23:59:59");
+    if (isNaN(end.getTime())) return true;
+    return Date.now() <= end.getTime();
+  }
+
+  var list = (window.HUNI_POPUPS || []).filter(stillOn);
+  var showSoon = !list.length;
 
   var igIcon =
     '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">' +
@@ -54,23 +99,8 @@ window.HUNI_POPUPS = [];
       '<circle cx="12" cy="10" r="2.4"/>' +
     "</svg>";
 
-  function renderSoon() {
-    if (!root) return;
-    root.classList.add("is-soon");
-    root.innerHTML =
-      '<p class="popup-label">' + esc(soon.label || "Next pop-up") + "</p>" +
-      "<h3>" + esc(soon.title || "Coming soon") + "</h3>" +
-      '<p class="popup-when">' + esc(soon.note || "") + "</p>" +
-      '<div class="popup-actions">' +
-        '<a class="btn-green" href="' + esc(soon.ctaHref || "https://www.instagram.com/hunimatcha.cebu/") + '" target="_blank" rel="noopener">' +
-          igIcon + esc(soon.ctaLabel || "Instagram") +
-        "</a>" +
-      "</div>";
-  }
-
-  function renderEvent(item) {
-    if (!root) return;
-    root.classList.remove("is-soon");
+  function eventCard(item, index) {
+    var label = index === 0 ? "Next pop-up" : "Then";
     var maps = item.mapsUrl
       ? '<a class="popup-ghost" href="' + esc(item.mapsUrl) + '" target="_blank" rel="noopener">' + mapsIcon + "Directions</a>"
       : "";
@@ -79,43 +109,60 @@ window.HUNI_POPUPS = [];
           igIcon + esc(item.ctaLabel || "Instagram") +
         "</a>"
       : "";
+    return (
+      '<article class="popup-card">' +
+        '<p class="popup-label">' + label + "</p>" +
+        "<h3>" + esc(item.venue) + "</h3>" +
+        '<p class="popup-street">' + esc(item.street) + "</p>" +
+        '<p class="popup-when">' + esc(item.date) + "</p>" +
+        '<div class="popup-actions">' + maps + cta + "</div>" +
+      "</article>"
+    );
+  }
+
+  function renderSoon() {
+    if (!root) return;
     root.innerHTML =
-      '<p class="popup-label">Next pop-up</p>' +
-      "<h3>" + esc(item.venue) + "</h3>" +
-      '<p class="popup-street">' + esc(item.street) + "</p>" +
-      '<p class="popup-when">' + esc(item.date) + "</p>" +
-      '<div class="popup-actions">' + maps + cta + "</div>";
+      '<article class="popup-card is-soon">' +
+        '<p class="popup-label">' + esc(soon.label || "Next pop-up") + "</p>" +
+        "<h3>" + esc(soon.title || "Coming soon") + "</h3>" +
+        '<p class="popup-when">' + esc(soon.note || "") + "</p>" +
+        '<div class="popup-actions">' +
+          '<a class="btn-green" href="' + esc(soon.ctaHref || "https://www.instagram.com/hunimatcha.cebu/") + '" target="_blank" rel="noopener">' +
+            igIcon + esc(soon.ctaLabel || "Instagram") +
+          "</a>" +
+        "</div>" +
+      "</article>";
   }
 
   if (root) {
     if (showSoon) renderSoon();
-    else renderEvent(next);
+    else root.innerHTML = list.map(eventCard).join("");
   }
 
   var heroPlace = document.getElementById("hero-popup-place");
   var heroWhen = document.getElementById("hero-popup-when");
   var heroBlock = document.getElementById("hero-popup");
   var i = 0;
-  var heroList = showSoon ? [] : list.filter(function (p) { return !p.comingSoon; });
 
   function paintHero() {
     if (!heroPlace) return;
-    if (!heroList.length) {
+    if (!list.length) {
       heroPlace.textContent = soon.heroPlace || "Next pop-up";
       if (heroWhen) heroWhen.textContent = soon.heroWhen || "Coming soon";
       return;
     }
-    var p = heroList[i % heroList.length];
+    var p = list[i % list.length];
     heroPlace.textContent = p.venue;
     if (heroWhen) heroWhen.textContent = p.date || p.street || "";
   }
 
   paintHero();
-  if (heroList.length > 1 && heroBlock) {
+  if (list.length > 1 && heroBlock) {
     setInterval(function () {
       heroBlock.classList.add("is-fading");
       setTimeout(function () {
-        i = (i + 1) % heroList.length;
+        i = (i + 1) % list.length;
         paintHero();
         heroBlock.classList.remove("is-fading");
       }, 320);

@@ -54,7 +54,7 @@ Do not hard-code a new drink or pop-up in the HTML. Edit the JS list, refresh.
 | Hours, address, map, contacts | `melange.html` / `index.html` (`#find-us`) |
 | Field notes | `docs/content.md` |
 
-**Pop-ups:** `HUNI_POPUPS = []` (or `comingSoon: true`) shows the Coming soon card and hero **Next pop-up / Coming soon**. First booked item is the Catch us card.
+**Pop-ups:** add every booked stall to `HUNI_POPUPS` (soonest first, optional `until: "YYYY-MM-DD"` to auto-drop). Catch us stacks cards; the hero rotates. Empty list = Coming soon.
 
 **Best-seller pills:** data is marked on Cookie Butter, Cereal Milk, Seasalt Matcha. `HUNI_SHOW_BEST_SELLERS` is **`false`** until the client wants them visible.
 
