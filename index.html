@@ -641,7 +641,8 @@
       box-shadow: 0 12px 40px rgba(31, 61, 36, 0.1);
     }
     .popup-card[hidden] { display: none; }
-    .popup-body {
+    .popup-body .popup-label,
+    .popup-body h3 {
       padding-right: 4.6rem;
     }
     .popup-body.is-enter-next {
@@ -1150,8 +1151,11 @@
         font-size: clamp(1rem, 4.8vw, 1.28rem);
         white-space: normal;
       }
+      .popup-actions {
+        flex-direction: column;
+      }
       .popup-actions .btn-green,
-      .popup-ghost { width: auto; flex: 1 1 10rem; }
+      .popup-ghost { width: 100%; flex: none; }
       .series-toggle { width: 100%; }
       .series-toggle button { flex: 1; }
       .side-rail {
