@@ -124,36 +124,46 @@ window.HUNI_POPUPS = [
     );
   }
 
-  function eventCard(item, index) {
+  function bodyHtml(item, index) {
     var label = index === 0 ? "Next pop-up" : "Then";
     var maps = item.mapsUrl
       ? '<a class="popup-ghost" href="' + esc(item.mapsUrl) + '" target="_blank" rel="noopener">' + mapsIcon + "Directions</a>"
       : "";
     return (
-      '<article class="popup-card">' +
-        '<p class="popup-label">' + label + "</p>" +
-        "<h3>" + esc(item.venue) + "</h3>" +
-        '<p class="popup-street">' + esc(item.street) + "</p>" +
-        '<p class="popup-when">' + esc(item.date) + "</p>" +
-        '<div class="popup-actions">' + maps + socialButton(item) + "</div>" +
-      "</article>"
+      '<p class="popup-label">' + label + "</p>" +
+      "<h3>" + esc(item.venue) + "</h3>" +
+      '<p class="popup-street">' + esc(item.street) + "</p>" +
+      '<p class="popup-when">' + esc(item.date) + "</p>" +
+      '<div class="popup-actions">' + maps + socialButton(item) + "</div>"
     );
   }
 
-  function paintCatchUs() {
+  var pagerBound = false;
+
+  function paintCatchUs(dir) {
     if (!root || !list.length) return;
-    root.innerHTML = eventCard(list[page], page) + pagerHtml();
-    var status = root.querySelector(".popup-pager-status");
-    if (status) status.textContent = (page + 1) + " / " + list.length;
+    if (!root.querySelector(".popup-card")) {
+      root.innerHTML =
+        '<article class="popup-card">' +
+          pagerHtml() +
+          '<div class="popup-body"></div>' +
+        "</article>";
+    }
+    var body = root.querySelector(".popup-body");
+    body.classList.remove("is-enter-next", "is-enter-prev");
+    body.innerHTML = bodyHtml(list[page], page);
+    if (dir) {
+      void body.offsetWidth;
+      body.classList.add(dir > 0 ? "is-enter-next" : "is-enter-prev");
+    }
     var prev = root.querySelector(".popup-prev");
     var next = root.querySelector(".popup-next");
-    if (prev) {
-      prev.disabled = page === 0;
-      prev.addEventListener("click", function () { go(-1); });
-    }
-    if (next) {
-      next.disabled = page === list.length - 1;
-      next.addEventListener("click", function () { go(1); });
+    if (prev) prev.disabled = page === 0;
+    if (next) next.disabled = page === list.length - 1;
+    if (!pagerBound) {
+      pagerBound = true;
+      if (prev) prev.addEventListener("click", function () { go(-1); });
+      if (next) next.addEventListener("click", function () { go(1); });
     }
   }
 
@@ -161,7 +171,7 @@ window.HUNI_POPUPS = [
     var nextPage = page + step;
     if (nextPage < 0 || nextPage >= list.length) return;
     page = nextPage;
-    paintCatchUs();
+    paintCatchUs(step);
   }
 
   function pagerHtml() {
@@ -169,11 +179,10 @@ window.HUNI_POPUPS = [
     return (
       '<div class="popup-pager" role="navigation" aria-label="Pop-up dates">' +
         '<button type="button" class="popup-prev" aria-label="Previous pop-up">' +
-          '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>' +
+          '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>' +
         "</button>" +
-        '<span class="popup-pager-status" aria-live="polite"></span>' +
         '<button type="button" class="popup-next" aria-label="Next pop-up">' +
-          '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>' +
+          '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>' +
         "</button>" +
       "</div>"
     );

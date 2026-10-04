@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Huni Matcha — Your Daily Matcha Fix</title>
   <meta name="description" content="Cebu-based matcha and hojicha. Creamy lattes, signature foams, your daily matcha fix." />
-  <link rel="canonical" href="https://huni-matcha.hunimatcha.workers.dev/" />
+  <link rel="canonical" href="https://hunimatcha.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Huni Matcha" />
   <meta property="og:title" content="Huni Matcha — Your Daily Matcha Fix" />
   <meta property="og:description" content="Cebu-based matcha and hojicha. Creamy lattes, signature foams, your daily matcha fix." />
-  <meta property="og:url" content="https://huni-matcha.hunimatcha.workers.dev/" />
-  <meta property="og:image" content="https://huni-matcha.hunimatcha.workers.dev/images/og.jpg" />
+  <meta property="og:url" content="https://hunimatcha.com/" />
+  <meta property="og:image" content="https://hunimatcha.com/images/og.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="675" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Huni Matcha — Your Daily Matcha Fix" />
   <meta name="twitter:description" content="Cebu-based matcha and hojicha. Creamy lattes, signature foams, your daily matcha fix." />
-  <meta name="twitter:image" content="https://huni-matcha.hunimatcha.workers.dev/images/og.jpg" />
+  <meta name="twitter:image" content="https://hunimatcha.com/images/og.jpg" />
   <link rel="icon" href="images/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -629,6 +629,7 @@
       margin-bottom: 1.5rem;
     }
     .popup-card {
+      position: relative;
       background: rgba(31, 61, 36, 0.72);
       color: #f4f1ea;
       border-radius: 28px;
@@ -640,41 +641,56 @@
       box-shadow: 0 12px 40px rgba(31, 61, 36, 0.1);
     }
     .popup-card[hidden] { display: none; }
+    .popup-body {
+      padding-right: 4.6rem;
+    }
+    .popup-body.is-enter-next {
+      animation: popup-enter-next 0.38s ease;
+    }
+    .popup-body.is-enter-prev {
+      animation: popup-enter-prev 0.38s ease;
+    }
+    @keyframes popup-enter-next {
+      from { opacity: 0; transform: translateX(14px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes popup-enter-prev {
+      from { opacity: 0; transform: translateX(-14px); }
+      to { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .popup-body.is-enter-next,
+      .popup-body.is-enter-prev { animation: none; }
+    }
     .popup-pager {
+      position: absolute;
+      top: 1.35rem;
+      right: 1.35rem;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.65rem;
+      justify-content: flex-end;
+      gap: 0.28rem;
+      z-index: 1;
     }
     .popup-pager[hidden] { display: none; }
     .popup-pager button {
-      width: 42px;
-      height: 42px;
-      border: 0;
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 50%;
-      background: var(--green);
+      background: rgba(255, 255, 255, 0.12);
       color: var(--blush);
       display: grid;
       place-items: center;
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+      transition: background 0.2s ease, opacity 0.2s ease;
     }
     .popup-pager button:hover:not(:disabled) {
-      background: var(--matcha);
-      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.24);
     }
     .popup-pager button:disabled {
-      opacity: 0.32;
+      opacity: 0.28;
       cursor: default;
-    }
-    .popup-pager-status {
-      min-width: 3.2rem;
-      text-align: center;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--green-mute);
     }
     .popup-label {
       font-size: 0.7rem;
@@ -1128,7 +1144,7 @@
       .hours-row { gap: 0.75rem; font-size: 0.86rem; }
       .btn-green { width: 100%; }
       .popup-card {
-        overflow: hidden;
+        overflow: visible;
       }
       .popup-card h3 {
         font-size: clamp(1rem, 4.8vw, 1.28rem);

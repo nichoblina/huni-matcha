@@ -9,7 +9,9 @@ This file is the current-state map for Claude CLI. Content field lists live in `
 
 ## Hosting status
 
-Client Cloudflare is **live** at `https://huni-matcha.hunimatcha.workers.dev`. GitHub Pages is the older preview. Custom domain still pending.
+Client Cloudflare Pages is **live** at `https://huni-matcha.hunimatcha.workers.dev`. Domain `hunimatcha.com` is on Cloudflare nameservers (`huxley` / `nia`) but not yet attached to the Pages project — no A/CNAME yet. GitHub Pages is the older preview.
+
+**Attach the domain:** Cloudflare dashboard (client account) → **Workers & Pages** → **huni-matcha** → **Custom domains** → add `hunimatcha.com` and `www.hunimatcha.com`. Because the zone is already on Cloudflare, Pages writes the DNS records. Prefer apex as primary and redirect `www` → apex. Canonical / OG already use `https://hunimatcha.com/`.
 
 **R2:** public dev URL is `https://pub-93a605c79ac04785bf8fdddc3df010a8.r2.dev`. Set `HUNI_MEDIA` in `scripts/media.js` to `…/huni-matcha/`. Upload objects under prefix `huni-matcha/` with the same filenames as `images/`. Do not push that switch until the files 200. Then delete heavy local photos; keep favicon + logos + `brand.png`.
 
