@@ -4,7 +4,7 @@ Live page is `index.html` (GitHub Pages). Edit the matching file below, then ref
 
 ## Next pop-up — `scripts/popups.js`
 
-**Booked stall(s):** add every date to `HUNI_POPUPS`, soonest first. Catch us shows one card each (first is **Next pop-up**, the rest **Then**). The hero rotates through them.
+**Booked stall(s):** add every date to `HUNI_POPUPS`, soonest first. Catch us pages one card at a time (arrows / swipe, no autoplay). First is **Next pop-up**, the rest **Then**. The hero still rotates through them.
 
 ```js
 window.HUNI_POPUPS = [
@@ -14,11 +14,14 @@ window.HUNI_POPUPS = [
     date: "October 4–5",
     until: "2026-10-05",
     mapsUrl: "https://maps.google.com/?q=Venue+Name+Cebu",
-    ctaLabel: "Venue Instagram",
-    ctaHref: "https://www.instagram.com/thevenue/"
+    ctaLabel: "handle",
+    ctaHref: "https://www.instagram.com/handle/",
+    ctaNetwork: "instagram"
   }
 ];
 ```
+
+`until` is the last day (`YYYY-MM-DD`). Skip `ctaHref` if the venue has no public page. Use `ctaNetwork: "facebook"` for a Facebook button.
 
 `until` is the last day (`YYYY-MM-DD`). After that, the stall drops off by itself. Skip `until` if you want to take it down by hand.
 

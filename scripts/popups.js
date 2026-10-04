@@ -1,18 +1,16 @@
 /**
  * Next Huni Matcha pop-up(s)
  * Add every booked stall to HUNI_POPUPS, soonest first.
- * Catch us renders a card per live stall. The hero rotates them.
+ * Catch us shows one card at a time (manual pager). The hero rotates them.
  *
- * Leave the list empty — or set comingSoon: true — for the Coming soon card.
- *
- * venue      — location name (shown large)
+ * venue      — location name
  * street     — street / area
- * date       — display date (e.g. "October 4–5")
- * until      — last day as YYYY-MM-DD; after that the stall drops off by itself
- * mapsUrl    — Google Maps search/link
- * ctaLabel   — Instagram button text
- * ctaHref    — venue Instagram
- * comingSoon — true to force Coming soon instead of a date
+ * date       — display date
+ * until      — last day YYYY-MM-DD; drops off after that
+ * mapsUrl    — Google Maps
+ * ctaHref    — Instagram or Facebook URL; omit for no social button
+ * ctaLabel   — button text
+ * ctaNetwork — "instagram" | "facebook" (guessed from the URL if omitted)
  */
 window.HUNI_COMING_SOON = {
   label: "Next pop-up",
@@ -31,8 +29,9 @@ window.HUNI_POPUPS = [
     date: "October 2–4 · 3PM – 11PM",
     until: "2026-10-04",
     mapsUrl: "https://maps.google.com/?q=Vibo%20Place%20Escario%20Cebu",
-    ctaLabel: "hunimatcha.cebu",
-    ctaHref: "https://www.instagram.com/hunimatcha.cebu/"
+    ctaLabel: "ukaytabai.official",
+    ctaHref: "https://www.instagram.com/ukaytabai.official/",
+    ctaNetwork: "instagram"
   },
   {
     venue: "Raketz Cebu 2026",
@@ -40,17 +39,16 @@ window.HUNI_POPUPS = [
     date: "October 10–11 · Mall hours",
     until: "2026-10-11",
     mapsUrl: "https://maps.google.com/?q=Ayala%20Center%20Cebu%20Activity%20Center",
-    ctaLabel: "hunimatcha.cebu",
-    ctaHref: "https://www.instagram.com/hunimatcha.cebu/"
+    ctaLabel: "ZA Entertainment",
+    ctaHref: "https://www.facebook.com/zaentertainmentprod",
+    ctaNetwork: "facebook"
   },
   {
     venue: "USC Days",
     street: "University of San Carlos – Main Campus",
     date: "October 19–23 · 9AM – 5PM",
     until: "2026-10-23",
-    mapsUrl: "https://maps.google.com/?q=University%20of%20San%20Carlos%20Main%20Campus%20Cebu",
-    ctaLabel: "hunimatcha.cebu",
-    ctaHref: "https://www.instagram.com/hunimatcha.cebu/"
+    mapsUrl: "https://maps.google.com/?q=University%20of%20San%20Carlos%20Main%20Campus%20Cebu"
   },
   {
     venue: "Burn Wellness x Temple of Leah",
@@ -58,8 +56,9 @@ window.HUNI_POPUPS = [
     date: "October 29–31 · 7AM – 7PM",
     until: "2026-10-31",
     mapsUrl: "https://maps.google.com/?q=Temple%20of%20Leah%20Cebu",
-    ctaLabel: "hunimatcha.cebu",
-    ctaHref: "https://www.instagram.com/hunimatcha.cebu/"
+    ctaLabel: "thetempleofleah",
+    ctaHref: "https://www.instagram.com/thetempleofleah/",
+    ctaNetwork: "instagram"
   }
 ];
 
@@ -83,8 +82,17 @@ window.HUNI_POPUPS = [
     return Date.now() <= end.getTime();
   }
 
+  function networkOf(item) {
+    if (item.ctaNetwork) return item.ctaNetwork;
+    var href = String(item.ctaHref || "").toLowerCase();
+    if (href.indexOf("facebook.com") !== -1) return "facebook";
+    if (href.indexOf("instagram.com") !== -1) return "instagram";
+    return "instagram";
+  }
+
   var list = (window.HUNI_POPUPS || []).filter(stillOn);
   var showSoon = !list.length;
+  var page = 0;
 
   var igIcon =
     '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">' +
@@ -93,21 +101,33 @@ window.HUNI_POPUPS = [
       '<circle cx="17.5" cy="6.5" r="0.7" fill="currentColor"/>' +
     "</svg>";
 
+  var fbIcon =
+    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">' +
+      '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>' +
+    "</svg>";
+
   var mapsIcon =
     '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">' +
       '<path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11z"/>' +
       '<circle cx="12" cy="10" r="2.4"/>' +
     "</svg>";
 
+  function socialButton(item) {
+    if (!item.ctaHref) return "";
+    var net = networkOf(item);
+    var icon = net === "facebook" ? fbIcon : igIcon;
+    var label = item.ctaLabel || (net === "facebook" ? "Facebook" : "Instagram");
+    return (
+      '<a class="btn-green" href="' + esc(item.ctaHref) + '" target="_blank" rel="noopener">' +
+        icon + esc(label) +
+      "</a>"
+    );
+  }
+
   function eventCard(item, index) {
     var label = index === 0 ? "Next pop-up" : "Then";
     var maps = item.mapsUrl
       ? '<a class="popup-ghost" href="' + esc(item.mapsUrl) + '" target="_blank" rel="noopener">' + mapsIcon + "Directions</a>"
-      : "";
-    var cta = item.ctaHref
-      ? '<a class="btn-green" href="' + esc(item.ctaHref) + '" target="_blank" rel="noopener">' +
-          igIcon + esc(item.ctaLabel || "Instagram") +
-        "</a>"
       : "";
     return (
       '<article class="popup-card">' +
@@ -115,8 +135,47 @@ window.HUNI_POPUPS = [
         "<h3>" + esc(item.venue) + "</h3>" +
         '<p class="popup-street">' + esc(item.street) + "</p>" +
         '<p class="popup-when">' + esc(item.date) + "</p>" +
-        '<div class="popup-actions">' + maps + cta + "</div>" +
+        '<div class="popup-actions">' + maps + socialButton(item) + "</div>" +
       "</article>"
+    );
+  }
+
+  function paintCatchUs() {
+    if (!root || !list.length) return;
+    root.innerHTML = eventCard(list[page], page) + pagerHtml();
+    var status = root.querySelector(".popup-pager-status");
+    if (status) status.textContent = (page + 1) + " / " + list.length;
+    var prev = root.querySelector(".popup-prev");
+    var next = root.querySelector(".popup-next");
+    if (prev) {
+      prev.disabled = page === 0;
+      prev.addEventListener("click", function () { go(-1); });
+    }
+    if (next) {
+      next.disabled = page === list.length - 1;
+      next.addEventListener("click", function () { go(1); });
+    }
+  }
+
+  function go(step) {
+    var nextPage = page + step;
+    if (nextPage < 0 || nextPage >= list.length) return;
+    page = nextPage;
+    paintCatchUs();
+  }
+
+  function pagerHtml() {
+    if (list.length < 2) return "";
+    return (
+      '<div class="popup-pager" role="navigation" aria-label="Pop-up dates">' +
+        '<button type="button" class="popup-prev" aria-label="Previous pop-up">' +
+          '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>' +
+        "</button>" +
+        '<span class="popup-pager-status" aria-live="polite"></span>' +
+        '<button type="button" class="popup-next" aria-label="Next pop-up">' +
+          '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>' +
+        "</button>" +
+      "</div>"
     );
   }
 
@@ -136,8 +195,19 @@ window.HUNI_POPUPS = [
   }
 
   if (root) {
-    if (showSoon) renderSoon();
-    else root.innerHTML = list.map(eventCard).join("");
+    if (showSoon) {
+      renderSoon();
+    } else {
+      paintCatchUs();
+      var startX = 0;
+      root.addEventListener("touchstart", function (e) {
+        startX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      root.addEventListener("touchend", function (e) {
+        var dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 48) go(dx < 0 ? 1 : -1);
+      });
+    }
   }
 
   var heroPlace = document.getElementById("hero-popup-place");

@@ -54,7 +54,7 @@ Do not hard-code a new drink or pop-up in the HTML. Edit the JS list, refresh.
 | Hours, address, map, contacts | `melange.html` / `index.html` (`#find-us`) |
 | Field notes | `docs/content.md` |
 
-**Pop-ups:** add every booked stall to `HUNI_POPUPS` (soonest first, optional `until: "YYYY-MM-DD"` to auto-drop). Catch us stacks cards; the hero rotates. Empty list = Coming soon.
+**Pop-ups:** add stalls to `HUNI_POPUPS` (soonest first, optional `until`). Catch us is a **manual pager** (no autoplay); the hero rotates. Omit `ctaHref` for no social button; `ctaNetwork: "facebook"` for FB.
 
 **Best-seller pills:** data is marked on Cookie Butter, Cereal Milk, Seasalt Matcha. `HUNI_SHOW_BEST_SELLERS` is **`false`** until the client wants them visible.
 
