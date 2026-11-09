@@ -1,17 +1,28 @@
 /**
  * Photo host
- * Empty HUNI_MEDIA = load from this repo’s images/ folder (GitHub Pages / local).
- * After R2 is public, set it to the folder URL (trailing slash), e.g.
- *   "https://pub-xxxxxxxx.r2.dev/huni-matcha/"
+ * Empty HUNI_MEDIA = load from this repo’s images/ folder (same origin).
+ * Do not point production at *.r2.dev — it is rate-limited and flakes on
+ * iPhone Safari. If photos move to R2, use a custom domain on the bucket
+ * (e.g. https://images.hunimatcha.com/huni-matcha/).
  * Favicon, logos, and brand.png stay in the repo and are never rewritten.
  */
-window.HUNI_MEDIA = "https://pub-93a605c79ac04785bf8fdddc3df010a8.r2.dev/huni-matcha/";
+window.HUNI_MEDIA = "";
 
 window.huniSrc = function (path) {
   var file = String(path || "").replace(/^images\//, "");
   var base = window.HUNI_MEDIA;
   if (!base) return "images/" + file;
   return base.replace(/\/?$/, "/") + file;
+};
+
+window.huniImgError = function (img) {
+  if (!img || img.dataset.huniFallback) return;
+  img.dataset.huniFallback = "1";
+  var src = img.getAttribute("src") || "";
+  var file = src.replace(/^.*\//, "");
+  if (!file) return;
+  if (src.indexOf("images/") === 0) return;
+  img.src = "images/" + file;
 };
 
 window.huniBindMedia = function () {

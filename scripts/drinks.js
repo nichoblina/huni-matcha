@@ -130,7 +130,7 @@ window.HUNI_DRINKS = [
       return (
         '<article class="card" data-series="' + esc(drink.series) + '">' +
           '<div class="card-img">' +
-            '<img src="' + esc(src(drink.src)) + '" alt="' + esc(altText(drink)) + '" onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'ph\',textContent:\'photo\'}))" />' +
+            '<img src="' + esc(src(drink.src)) + '" alt="' + esc(altText(drink)) + '" onerror="window.huniImgError && window.huniImgError(this)" />' +
           "</div>" +
           "<div>" +
             '<div class="card-title"><h3>' + esc(drink.name) + "</h3>" + badge + "</div>" +

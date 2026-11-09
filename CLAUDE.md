@@ -13,7 +13,7 @@ Client Cloudflare Pages is **live** at `https://huni-matcha.hunimatcha.workers.d
 
 **Attach the domain:** Cloudflare dashboard (client account) → **Workers & Pages** → **huni-matcha** → **Custom domains** → add `hunimatcha.com` and `www.hunimatcha.com`. Because the zone is already on Cloudflare, Pages writes the DNS records. Prefer apex as primary and redirect `www` → apex. Canonical / OG already use `https://hunimatcha.com/`.
 
-**R2:** public dev URL is `https://pub-93a605c79ac04785bf8fdddc3df010a8.r2.dev`. Set `HUNI_MEDIA` in `scripts/media.js` to `…/huni-matcha/`. Upload objects under prefix `huni-matcha/` with the same filenames as `images/`. Do not push that switch until the files 200. Then delete heavy local photos; keep favicon + logos + `brand.png`.
+**R2:** photos currently load from `images/` on hunimatcha.com. Do **not** set `HUNI_MEDIA` to the `*.r2.dev` URL on the live site — it is rate-limited and drops images on iPhone Safari. If the bucket is used later, attach a custom domain (`images.hunimatcha.com`) and point `HUNI_MEDIA` at that. Keep favicon + logos + `brand.png` in the repo.
 
 Studio stays on **Path B**: we push `main`, Pages auto-deploys; they own the Cloudflare account.
 
@@ -27,7 +27,7 @@ Source of truth: `../small-business-templates/DEPLOYMENT.md` → **Images**, als
 - Facebook and Google Drive links are for **collecting** files. Never use them as live `src`.
 - Do not AI-generate brand art unless the user asks. Existing drink stills on the menu were generated from the client’s poster; swapping in real product photos is preferred when they send them.
 
-Huni photos currently live in `images/`. After `HUNI_MEDIA` is set, drink/media/crew/hero files move to R2; brand marks stay in the repo.
+Huni photos currently live in `images/` and are served from the site origin. Brand marks stay in the repo.
 
 ## What the site is
 
